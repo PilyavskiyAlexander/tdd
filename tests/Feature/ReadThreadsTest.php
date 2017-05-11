@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ReadThreadsTest extends TestCase
 {
-//    use DatabaseMigrations;
+    use DatabaseMigrations;
 
     protected $thread;
 

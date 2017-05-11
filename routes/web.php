@@ -21,9 +21,10 @@ $router->group(['prefix' => 'threads'], function(Router $router){
     $router->get('/', ['as' => 'all_threads', 'uses' => 'ThreadController@index']);
     $router->get('/{thread}', ['as' => 'show_thread', 'uses' => 'ThreadController@show']);
 
-    $router->group(['middleware' => 'auth'], function(Router $router){
-        $router->post('/{thread}/replies', ['as' => 'thread_repliers', 'uses' => 'ReplyController@store']);
-    });
+//    $router->group(['middleware' => 'auth'], function(Router $router){
+        $router->post('/', ['as' => 'create_thread', 'uses' => 'ThreadController@store'])->middleware('auth');
+        $router->post('/{thread}/replies', ['as' => 'thread_repliers', 'uses' => 'ReplyController@store'])->middleware('auth');
+//    });
 });
 
 
