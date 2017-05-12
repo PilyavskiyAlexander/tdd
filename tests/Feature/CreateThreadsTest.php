@@ -13,9 +13,11 @@ class CreateThreadsTest extends TestCase
 
     public function test_that_guests_can_not_create_the_threads()
     {
-//        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->expectException('Illuminate\Auth\AuthenticationException');
 
         $thread = factory('App\Thread')->make();
+        $thread['_token'] = csrf_token();
+
 
         $response = $this->post(route('create_thread'), $thread->toArray());
 
@@ -33,4 +35,13 @@ class CreateThreadsTest extends TestCase
                 ->assertSee($thread->title)
                 ->assertSee($thread->body);
     }
+
+    public function test_than_guests_may_not_create_threads()
+    {
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+
+        $this->get(route('create_thread_view'))
+            ->assertRedirect('login');
+    }
+
 }

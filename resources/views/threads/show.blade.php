@@ -12,15 +12,13 @@
                         {{$thread->body}}
                     </div>
                 </div>
-                <div class="row">
-                    @foreach($thread->repliers as $reply)
-                        @include('threads.components.reply')
-                    @endforeach
-                </div>
+
+                @foreach($thread->repliers as $reply)
+                    @include('threads.components.reply')
+                @endforeach
+
                 @if(auth()->check())
-                    <div class="row">
-                        @include('threads.components.reply_form')
-                    </div>
+                   @include('threads.components.reply_form')
                 @else
                     <p class="text-center"><a href="{{route('login')}}"> @lang('Please sing in to participate in this discussion') </a></p>
                 @endif

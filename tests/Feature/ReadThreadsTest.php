@@ -36,7 +36,7 @@ class ReadThreadsTest extends TestCase
 
     public function test_user_can_see_single_thread()
     {
-        $this->get('/threads/' . $this->thread->id)
+        $this->get(route('show_thread', ['channel' => $this->thread->channel->name, 'thread' => $this->thread->id]))
              ->assertSee($this->thread->title);
     }
 
@@ -44,7 +44,7 @@ class ReadThreadsTest extends TestCase
     {
         factory('App\Reply')->create(['thread_id' => $this->thread->id]);
 
-        $response = $this->get(route('show_thread', $this->thread->id));
+        $response = $this->get(route('show_thread', ['channel' => $this->thread->channel->name, 'thread' => $this->thread->id]));
 
         $response->assertSee($this->thread->repliers->first()->body);
     }

@@ -22,7 +22,7 @@ class ThreadTest extends TestCase
 
     public function test_show_one_thread()
     {
-        $response = $this->get(route('show_thread', $this->thread->id));
+        $response = $this->get(route('show_thread', ['channel' => $this->thread->channel->name, 'thread' => $this->thread->id]));
 
         $response->assertStatus(200);
     }

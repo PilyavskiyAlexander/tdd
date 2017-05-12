@@ -13,8 +13,10 @@ class ParticipateInFormTest extends TestCase
 
     public function test_unauthenticates_users_may_not_add_repliers()
     {
-//        $this->expectException();
-        // В Laravel 5.4 ошибка не появляется, а автоматически редиректит на страницу Log in, поэтому ошибки и не будет, а только 302 редирект
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+        // Оказывается, этот трабл приходит в зборке с Laravel
+        // Нужно отключить отлавливания исключений
+        // Решения - https://gist.github.com/adamwathan/125847c7e3f16b88fa33a9f8b42333da
 
         $user = factory('App\User')->create();
         $thread = factory('App\Thread')->create();
@@ -33,7 +35,7 @@ class ParticipateInFormTest extends TestCase
 
         $this->post(route('thread_repliers', $thread->id), $reply->toArray());
 
-        $this->get(route('show_thread', $thread->id))
+        $this->get(route('show_thread', ['channel' => $thread->channel->name, 'thread' => $thread->id]))
                 ->assertSee($reply->body);
     }
 }

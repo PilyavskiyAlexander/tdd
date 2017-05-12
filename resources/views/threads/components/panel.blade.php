@@ -4,7 +4,7 @@
         @foreach($items as $item)
             <artical>
                 <h4>
-                    <a href="{{route($route_name, $item->id)}}">
+                    <a href="{{route($route_name, ['channel' => $item->channel->name, 'thread' => $item->id])}}">
                         {{$item->title}}
                     </a>
                 </h4>
