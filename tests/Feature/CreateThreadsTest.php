@@ -44,4 +44,38 @@ class CreateThreadsTest extends TestCase
             ->assertRedirect('login');
     }
 
+    public function test_than_thread_required_a_title()
+    {
+        $this->withExceptionHandling()->actingAs(factory('App\User')->create());
+
+        $thread = factory('App\Thread')->make(['title' => null]);
+
+        $this->post(route('create_thread'), $thread->toArray())
+                ->assertSessionHasErrors('title');
+    }
+
+    public function test_than_thread_required_a_body()
+    {
+        $this->withExceptionHandling()->actingAs(factory('App\User')->create());
+
+        $thread = factory('App\Thread')->make(['body' => null]);
+
+        $this->post(route('create_thread'), $thread->toArray())
+            ->assertSessionHasErrors('body');
+    }
+
+    public function test_than_thread_required_a_channel_id()
+    {
+        $this->withExceptionHandling()->actingAs(factory('App\User')->create());
+        $thread = factory('App\Thread')->make(['channel_id' => null]);
+        $this->post(route('create_thread'), $thread->toArray())
+            ->assertSessionHasErrors('channel_id');
+
+
+        $this->withExceptionHandling()->actingAs(factory('App\User')->create());
+        $thread = factory('App\Thread')->make(['channel_id' => 999]);
+        $this->post(route('create_thread'), $thread->toArray())
+            ->assertSessionHasErrors('channel_id');
+    }
+
 }

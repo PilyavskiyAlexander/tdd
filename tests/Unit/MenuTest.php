@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MenuTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function test_login_btn()
     {
 
