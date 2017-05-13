@@ -38,4 +38,15 @@ class ParticipateInFormTest extends TestCase
         $this->get(route('show_thread', ['channel' => $thread->channel->name, 'thread' => $thread->id]))
                 ->assertSee($reply->body);
     }
+
+    public function test_that_reply_requires_a_body()
+    {
+        $this->withExceptionHandling()->actingAs($user = factory('App\User')->create());
+
+        $thread = factory('App\Thread')->create();
+        $reply = factory('App\Reply')->make(['user_id' => $user->id, 'thread_id' => $thread->id, 'body' => null]);
+
+        $this->post(route('thread_repliers', $thread->id), $reply->toArray())
+            ->assertSessionHasErrors('body');
+    }
 }
