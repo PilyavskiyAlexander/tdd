@@ -11,6 +11,14 @@
                         <form action="{{ route('create_thread') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
+                                <label for="channel_id">@lang('main.channel'):</label>
+                                <select name="channel_id" id="channel_id" class="form-control">
+                                    @foreach(App\Channel::all() as $channel)
+                                        <option value="{{$channel->id}}">{{$channel->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="title">@lang('main.title'):</label>
                                 <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}">
                             </div>
