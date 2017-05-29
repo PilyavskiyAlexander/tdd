@@ -26,6 +26,7 @@ $router->group(['prefix' => 'threads'], function(Router $router){
         $router->post('/{thread}/replies', ['as' => 'thread_repliers', 'uses' => 'ReplyController@store']);
     });
 
+    $router->get('/{channel}', ['as' => 'show_channel', 'uses' => 'ChannelController@show']);
     $router->get('/{channel}/{thread}', ['as' => 'show_thread', 'uses' => 'ThreadController@show'])->where('thread', '[0-9]+');
 });
 
