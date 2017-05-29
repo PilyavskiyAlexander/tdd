@@ -85,7 +85,7 @@
                 </div>
             </div>
         </nav>
-
+        @include('errors.validation')
         @yield('content')
     </div>
 
