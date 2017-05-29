@@ -12,19 +12,19 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="channel_id">@lang('main.channel'):</label>
-                                <select name="channel_id" id="channel_id" class="form-control">
+                                <select name="channel_id" id="channel_id" class="form-control" required>
                                     @foreach(App\Channel::all() as $channel)
-                                        <option value="{{$channel->id}}">{{$channel->name}}</option>
+                                        <option value="{{$channel->id}}" {{ old('channel_id') == $channel->id ? 'selected' : '' }}>{{$channel->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="title">@lang('main.title'):</label>
-                                <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}">
+                                <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="body">@lang('main.body'):</label>
-                                <textarea name="body" id="body" rows="10" class="form-control">{{old('body')}}</textarea>
+                                <textarea name="body" id="body" rows="10" class="form-control" required>{{old('body')}}</textarea>
                             </div>
                             <div class="col-xs-6 col-xs-offset-3">
                                 <button type="submit" class="btn btn-success btn-block">@lang('main.create')</button>
