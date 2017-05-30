@@ -47,7 +47,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ trans_choice('main.channel', 2) }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                @foreach(App\Channel::all() as $channel)
+                                @foreach($channels as $channel)
                                     <li><a href="{{route('show_channel', $channel->name)}}">{{ $channel->slug }}</a></li>
                                 @endforeach
                             </ul>
