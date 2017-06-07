@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
+use App\User;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -101,5 +102,11 @@ class ThreadController extends Controller
     public function destroy(Thread $thread)
     {
         //
+    }
+
+    public function show_user_threads(User $user)
+    {
+        $threads = Thread::where('user_id', $user->id)->get();
+        return view('threads.index', compact('threads'));
     }
 }

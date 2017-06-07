@@ -8,6 +8,8 @@ return [
     'title' => 'Заголовок',
     'body' => 'Текст',
     'all_threads' => 'Все темы',
+    'threads' => 'Темы',
+    'my_threads' => 'Мои темы',
     'channel' => 'Канал|Каналы',
 
 

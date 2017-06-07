@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class ReadThreadsTest extends TestCase
 {
@@ -58,5 +60,18 @@ class ReadThreadsTest extends TestCase
         $this->get(route('show_channel', $channel->name))
                 ->assertSee($threadInChannel->title)
                 ->assertDontSee($threadNotInChannel->title);
+    }
+
+    public function test_than_user_can_filter_threads_by_any_user()
+    {
+
+        $this->actingAs(factory('App\User')->create());
+
+        $thread = factory('App\Thread')->create(['user_id' => auth()->id()]);
+        $threadNotUser = factory('App\Thread')->create();
+
+        $this->get(route('user_threads', auth()->id()))
+                ->assertSee($thread->title)
+                ->assertDontSee($threadNotUser->title);
     }
 }

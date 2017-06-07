@@ -23,7 +23,9 @@ $router->group(['prefix' => 'threads'], function(Router $router){
     $router->group(['middleware' => 'auth'], function(Router $router){
         $router->get('/create', ['as' => 'create_thread_view', 'uses' => 'ThreadController@create']);
         $router->post('/', ['as' => 'create_thread', 'uses' => 'ThreadController@store']);
+        $router->get('/{user}', ['as' => 'user_threads', 'uses' => 'ThreadController@show_user_threads'])->where('user', '[0-9]+');;
         $router->post('/{thread}/replies', ['as' => 'thread_repliers', 'uses' => 'ReplyController@store']);
+
     });
 
     $router->get('/{channel}', ['as' => 'show_channel', 'uses' => 'ChannelController@show']);

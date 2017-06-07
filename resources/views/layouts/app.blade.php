@@ -43,7 +43,17 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li><a href="{{route('all_threads')}}">@lang('main.all_threads')</a></li>
+                        &nbsp;
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ trans_choice('main.threads', 2) }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('all_threads')}}">@lang('main.all_threads')</a></li>
+                                @if(auth()->check())
+                                    <li><a href="{{route('user_threads', auth()->user()->id )}}">@lang('main.my_threads')</a></li>
+                                    <li><a href="{{route('create_thread_view')}}">@lang('main.create')</a></li>
+                                @endif
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ trans_choice('main.channel', 2) }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">

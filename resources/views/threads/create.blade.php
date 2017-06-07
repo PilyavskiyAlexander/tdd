@@ -11,7 +11,7 @@
                         <form action="{{ route('create_thread') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="channel_id">@lang('main.channel'):</label>
+                                <label for="channel_id">{{trans_choice('main.channel', 2)}}:</label>
                                 <select name="channel_id" id="channel_id" class="form-control" required>
                                     @foreach($channels as $channel)
                                         <option value="{{$channel->id}}" {{ old('channel_id') == $channel->id ? 'selected' : '' }}>{{$channel->name}}</option>
